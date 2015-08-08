@@ -9,6 +9,7 @@ app.set('port', 8080);
 
 // Configure the routes
 app.use(express.static(__dirname + '/public')); // Route for public resources: images/css/js
+app.use(require('./controllers'));
 
 // Start the listen server
 app.listen(app.get('port'), function () {
