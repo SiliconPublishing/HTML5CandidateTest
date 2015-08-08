@@ -1,0 +1,10 @@
+{
+  "name": "HTML5CandidateTest",
+  "version": "0.0.1",
+  "author": "Amir Raofi <staramir@gmail.com>",
+  "main": "app",
+  "private": true,
+  "dependencies": {
+    "express": ">4.8.0"
+  }
+}
