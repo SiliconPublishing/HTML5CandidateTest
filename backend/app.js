@@ -7,7 +7,6 @@ var express = require('express'),
 app.use(bodyParser.urlencoded());
 app.use(bodyParser.json());
 app.use(express.static('public'));
-app.res = {};
 
 app.use(function(req, res, next) {
     var oneof = false;
@@ -36,37 +35,41 @@ app.use(function(req, res, next) {
     }
 });
 
-app.get('/manifest', function(req, res, next) {
-    app.res = res;
-
-    fs.readFile("data/manifest.xml", readFileCallback);
+app.get('/manifest', function(req, res) {
+    fs.readFile("data/manifest.xml", function(err, data) {
+        readFileCallback(err, data, res);
+    });
 });
 
-app.get('/layout', function(req, res) {
-    app.res = res;
-
-    fs.readFile("data/layout_1.xml", readFileCallback);
+app.get('/layouts/:filename', function(req, res) {
+    fs.readFile("data/" + req.params.filename, function(err, data) {
+        readFileCallback(err, data, res);
+    });
 });
 
 app.listen(3000);
 
-
-function readFileCallback(err, data) {
+function readFileCallback(err, data, res) {
     if (err) {
-        app.res.status(500).send(err);
-        throw err;
+        res.status(404).send("Error: resource does not exist.");
+        return;
     }
-    parseXML(data, xmlParseCB);
+    xmlParser(data, res);
 }
 
-function xmlParseCB(err, data) {
-    if (err) throw err;
+function xmlParser(data, res) {
+    function cb(err, data) {
+        if (err) {
+            res.status(500).send("Error transforming resource to json");
+            return;
+        }
 
-    sendResponse(data, 200);
+        sendResponse(data, 200, res);
+    }
+
+    parseXML(data, cb);
 }
 
-function sendResponse(data, status) {
-    app.res.status(status).send(data);
+function sendResponse(data, status, res) {
+    res.status(status).send(data);
 }
-
-
