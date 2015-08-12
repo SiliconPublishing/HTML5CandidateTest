@@ -1,3 +1,9 @@
+# Instructions
+1. Clone or download the repo
+2. From the root directory of the repo, run: `npm install`
+3. To launch the server, from the root directory of the repo, run: `node app` or if you're using nodemon, just `nodemon`
+4. Open a browser and go to `http://localhost:8080`
+
 # HTML5CandidateTest
 Test for potential HTML5 developers
 
