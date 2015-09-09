@@ -1,0 +1,9 @@
+<h1>Silicon Rest API
+</h1>
+<h3><strong>Click to get the manifest and found template (assetSource)</strong>
+<a class="btn btn-primary" role="button" href="javascript:void(0)" ng-click="getManifest()">GET</a></h3>
+<p ng-repeat="xmlfile in loadLayoutLinks" ng-set="count=0">
+	<a href="" ng-click="getLayout(xmlfile, count)">Found: {{xmlfile}} (click to load)</a>
+</p>
+<h3>{{title}}</h3>
+	<json-tree object="json.object" start-expanded="true" id="tree" style="display:none"></json-tree> 

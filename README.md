@@ -1,3 +1,33 @@
+# Instructions
+1. Clone or download the repo
+2. From the root directory of the repo, run: `npm install`
+3. From the root directory of the repo, run: `bower install`
+3. To launch the server, from the src/backend directory of the repo, run: `node index.js`
+4. Open a browser and go to `http://localhost:8080`
+
+#Remarks
+
+## Test
+There are some jasmine tests (end to end) to check the manifest and layout loading from the services that you can run using $ ./node_modules/.bin/jasmine-node --verbose ./spec/ You don't need to start the server, the tests will start and stop on port 8081
+
+##Get data from XML to display layout
+I use the manifest.xml just to get the assetSource data and load the layout, so manifest is used but not rendered.
+
+##Server
+Instead of using Express we used Percolator, a library more oriented to manage restful services (anyway for this simple example make not much difference)
+
+##User Interface
+I use AngularJS to build the interface. Just a view and controller though, but clean and easy. In service folder you can find all of the API calls in services.js, called from HomeController. I used the Angular Tree, a directive base on a recursive call to traverse complex Json objects and build a tree view
+
+##RESTful API
+For an easy follow, services are placed in two files: 
+
+**Backend:** src/backend/server.js, where all the calls are listed (Percolator will help when use become more complex)
+**FrontEnd:** src/frontend/service/services.js, where all client side calls are listed
+
+##Adapt to different data
+In order to test the mechanism, I include a manifest pointing to multiple layout instead of just one. You can find it on src/backend/multiple.zip. Just unzip to backend folder (manifest will be overwrited, rename the original if you want to keep it before unzipping the new data) The manifest point to layouts in different folders, and when loaded shows many links to load each of the XML.
+
 # HTML5CandidateTest
 Test for potential HTML5 developers
 
