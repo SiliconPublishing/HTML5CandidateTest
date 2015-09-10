@@ -1,7 +1,9 @@
 'use strict';
 
 
-     var   app   =  angular.module('app',  ['ngRoute',  'angular-json-tree', 'app.home']);
+     var   app   =  angular.module('app',  ['ngRoute',  'angular-json-tree', 'app.home'])
+
+     .factory('HomeMediator', HomeMediator.newInstance);
 
      app.config(function($routeProvider) {
       
